@@ -27,12 +27,12 @@ import {
   ViroARSceneNavigator
 } from 'react-viro';
 
-import viroApiKey from "./api/apiKeys"
+import {viroApiKey} from "./api/apiKeys"
 
 //default Navigatortype
-var UNSET = "UNSET";
-var defaultNavigatorType = UNSET;
-var InitialARScene = require('../js/HelloWorldSceneAR');
+let UNSET = "UNSET";
+let defaultNavigatorType = UNSET;
+let InitialARScene = require('../js/HelloWorldSceneAR');
 
 export default class App extends Component {
   constructor() {
@@ -56,11 +56,12 @@ export default class App extends Component {
                     type='font-awesome'
                     color='#f50'
                     onPress={null} />
-                    <Button/>
             </View>
             <View
                 style={{position:'absolute', bottom:10, right:10, width:20,height:20, backgroundColor:'#fff'}}
-                onPress={null} ></View>
+                onPress={null} >
+
+            </View>
           <ViroARSceneNavigator apiKey={viroApiKey}
           style={{position: 'absolute', height:'100%', width:'100%'}}
           initialScene={{scene: InitialARScene}} />
