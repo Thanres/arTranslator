@@ -2,12 +2,14 @@
 
 import React, { Component } from 'react';
 
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Alert} from 'react-native';
 
 import {
+  ViroImage,
   ViroARScene,
   ViroText,
   ViroConstants,
+  ViroButton,
 } from 'react-viro';
 
 export default class HelloWorldSceneAR extends Component {
@@ -17,9 +19,9 @@ export default class HelloWorldSceneAR extends Component {
 
     // Set initial state here
     this.state = {
-      text : "Initializing AR..."
+      text : "leer",
+      uri : require("./res/button_base.png")
     };
-
     // bind 'this' to functions
     this._onInitialized = this._onInitialized.bind(this);
   }
@@ -27,16 +29,23 @@ export default class HelloWorldSceneAR extends Component {
   render() {
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} >
-        <ViroText text={this.state.text} scale={[.5, .5, .5]} position={[0, 0, -1]} style={styles.helloWorldTextStyle} />
+          <ViroImage
+              position={[0, 0, -3]}
+              source={this.state.uri}
+          />
       </ViroARScene>
     );
   }
 
   _onInitialized(state, reason) {
     if (state == ViroConstants.TRACKING_NORMAL) {
-      this.setState({
-        text : "Hello World!"
-      });
+      /*this.props.sceneNavigator.takeScreenshot('name',false).then((temp) =>
+        {this.setState({
+          text : temp.url,
+          uri : {uri: 'file://' + temp.url}//temp.url
+        })
+        console.warn(this.state.text);},
+      );*/
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }

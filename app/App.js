@@ -15,6 +15,8 @@ import {
   StyleSheet,
   PixelRatio,
   TouchableHighlight,
+  TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import {
@@ -24,7 +26,7 @@ import {
 
 import {
   ViroVRSceneNavigator,
-  ViroARSceneNavigator
+  ViroARSceneNavigator,
 } from 'react-viro';
 
 import {viroApiKey} from "./api/apiKeys"
@@ -38,10 +40,9 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      navigatorType : defaultNavigatorType,
-      viroApiKey : viroApiKey
-    }
-    //this._exitViro = this._exitViro.bind(this);
+      text : "click",
+    };
+    this.takephoto = this.takephoto.bind(this)
   }
 
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
@@ -49,23 +50,27 @@ export default class App extends Component {
   render() {
     return(
         <View style={{height:'100%', width:'100%'}}>
-            <View style={{position:'absolute', bottom:10, right:10}}>
-                <Icon
-                    raised
-                    name='camera'
-                    type='font-awesome'
-                    color='#f50'
-                    onPress={null} />
-            </View>
-            <View
-                style={{position:'absolute', bottom:10, right:10, width:20,height:20, backgroundColor:'#fff'}}
-                onPress={null} >
-
-            </View>
-          <ViroARSceneNavigator apiKey={viroApiKey}
-          style={{position: 'absolute', height:'100%', width:'100%'}}
-          initialScene={{scene: InitialARScene}} />
+            <View style={{height:28}}/>
+            <Button title={this.state.text} onPress={()=>this.takephoto()}/>
+            <ViroARSceneNavigator apiKey={viroApiKey}
+                ref='sceneNavigator'
+                style={{position: 'absolute', height:'100%', width:'100%'}}
+                initialScene={{scene: InitialARScene}} />
         </View>
     )
   }
+
+  takephoto() {
+    console.log(this.refs.sceneNavigator)
+    /*
+      this.refs.sceneNavigator.current.takeScreenshot('name',false).then((temp) =>
+        {this.setState({
+          navigator : this.state.navigator,
+          text : temp.url,
+          uri : {uri: 'file://' + temp.url}//temp.url
+        })
+        console.warn(this.state.text);}
+      );*/
+  }
+
 }
