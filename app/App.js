@@ -41,25 +41,47 @@ export default class App extends Component {
     super();
     this.state = {
       text : "click",
+      lang : 'DE'
     };
-    this.takephoto = this.takephoto.bind(this)
+    this.takephoto = this.takephoto.bind(this),
+    this.changelang = this.changelang.bind(this)
   }
 
+  onDeleteBTN = () => {
+    this.alert('OnDelete')
+  }
   // Replace this function with the contents of _getVRNavigator() or _getARNavigator()
   // if you are building a specific type of experience.
   render() {
     return(
         <View style={{height:'100%', width:'100%'}}>
-            <View style={{height:28}}/>
-            <Button title={this.state.text} onPress={()=>this.takephoto()}/>
             <ViroARSceneNavigator apiKey={viroApiKey}
                 ref='sceneNavigator'
-                style={{position: 'absolute', height:'100%', width:'100%'}}
+                style={{position: 'absolute',height:'100%', width:'100%',top:30}}
                 initialScene={{scene: InitialARScene}} />
+            <TouchableOpacity style={{position:'absolute',height:100, width:100, backgroundColor:'white'}} onPress={
+              () => Alert.alert(
+                'select language',
+                '',
+                [
+                  {text: 'DE', onPress: () => this.changelang('DE')},
+                  {text: 'EN', onPress: () => this.changelang('EN')},
+                  {text: 'ESP', onPress: () => this.changelang('ESP')},
+                ],
+                { cancelable: false }
+            )}><Text>{this.state.lang}</Text><Text>{this.state.lang}</Text><Text>{this.state.lang}</Text><Text>{this.state.lang}</Text></TouchableOpacity>
         </View>
     )
   }
 
+  changelang(lang){
+    this.setState({
+      ...this.state,
+      lang : lang
+    })
+    this.state.lang = lang;
+    console.warn(this.state.lang)
+  }
   takephoto() {
     console.log(this.refs.sceneNavigator)
     /*
