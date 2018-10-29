@@ -2,7 +2,7 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import App from '../App';
+import Scene from '../scenes/Scene';
 import { toggleMenu, setGesturesState, setBarStyle } from '../actions/menuActions';
 import { getProfile, logout } from '../actions/userActions';
 import { getPosts } from '../actions/postActions';
