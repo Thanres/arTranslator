@@ -34,7 +34,7 @@ import {viroApiKey} from "./api/apiKeys"
 //default Navigatortype
 let UNSET = "UNSET";
 let defaultNavigatorType = UNSET;
-let InitialARScene = require('../js/HelloWorldSceneAR');
+let InitialARScene = require('./scenes/Scene');
 
 export default class App extends Component {
   constructor() {
