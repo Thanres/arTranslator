@@ -1,15 +1,18 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { Provider, connect } from 'react-redux';
+import store from '../redux/store';
 
 import App from '../App';
 import { changeLanguage } from '../redux/actions/langActions';
-import { receiveTranslation, postTranslation } from '../actions/redux/transActions';
-import { receiveVision, postVision } from '../actions/redux/visionActions';
+import { receiveTranslation, postTranslation } from '../redux/actions/transActions';
+import { receiveVision, postVision } from '../redux/actions/visionActions';
 
 const mapStateToProps = state => {
     return {
-        user : null
+        labels : null,
+        languages : null,
+        translations : null,
     };
 };
 
@@ -21,6 +24,13 @@ const mapDispatchToProps = dispatch => {
     }, dispatch);
 };
 
-const Main = connect(mapStateToProps, mapDispatchToProps)(MainStack);
+const AppS = connect(mapStateToProps, mapDispatchToProps)(App);
 
-export default Main;
+const appWrapper = () => (
+    <Provider store={store}>
+        <AppS />
+    </Provider>
+);
+
+
+export default appWrapper;

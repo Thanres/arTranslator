@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -29,3 +29,4 @@ const mapDispatchToProps = dispatch => {
 const Main = connect(mapStateToProps, mapDispatchToProps)(MainStack);
 
 export default Main;
+*/

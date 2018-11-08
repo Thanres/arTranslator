@@ -56,6 +56,7 @@ export default class App extends Component {
     return(
         <View style={{height:'100%', width:'100%'}}>
             <ViroARSceneNavigator apiKey={viroApiKey}
+                viroAppProps = {{...this.props, ...this.state}}
                 ref='sceneNavigator'
                 style={{position: 'absolute',height:'100%', width:'100%',top:30}}
                 initialScene={{scene: InitialARScene}} />

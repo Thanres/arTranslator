@@ -12,7 +12,7 @@ import {
   ViroButton,
 } from 'react-viro';
 
-export default class HelloWorldSceneAR extends Component {
+export default class Scene extends Component {
 
   constructor() {
     super();
@@ -33,11 +33,13 @@ export default class HelloWorldSceneAR extends Component {
               position={[0, 0, -3]}
               source={this.state.uri}
           />
+          <ViroText position={[0, 0, -3]} text={this.props.sceneNavigator.viroAppProps.lang}/>
       </ViroARScene>
     );
   }
 
   _onInitialized(state, reason) {
+    console.warn(JSON.stringify(this.props.sceneNavigator))
     if (state == ViroConstants.TRACKING_NORMAL) {
       /*this.props.sceneNavigator.takeScreenshot('name',false).then((temp) =>
         {this.setState({
@@ -62,4 +64,4 @@ var styles = StyleSheet.create({
   },
 });
 
-module.exports = HelloWorldSceneAR;
+module.exports = Scene;
