@@ -70,7 +70,7 @@ export default class App extends Component {
                   {text: 'ESP', onPress: () => this.changelang('ESP')},
                 ],
                 { cancelable: false }
-            )}><Text>{this.state.lang}</Text><Text>{this.state.lang}</Text><Text>{this.state.lang}</Text><Text>{this.state.lang}</Text></TouchableOpacity>
+            )}><Text>{this.props.lang}</Text><Text>{this.props.languages.lang}</Text><Text>{this.props.languages.lang}</Text><Text>{this.props.lang}</Text></TouchableOpacity>
         </View>
     )
   }
@@ -82,7 +82,8 @@ export default class App extends Component {
     })
     this.state.lang = lang;
     this.props.changeLanguage(lang)
-    console.warn(this.props)
+    //console.warn(this.props)
+    console.warn(this.props.languages.lang)
   }
   takephoto() {
     console.log(this.refs.sceneNavigator)

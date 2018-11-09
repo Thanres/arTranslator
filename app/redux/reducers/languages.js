@@ -4,7 +4,7 @@ import labels from "./labels";
 function languages(state = [], action){
     switch (action.type) {
         case type.CHANGE_LANGUAGE:
-            return Object.assign({}, state, {language:{lang:action.data}});
+            return Object.assign({}, state, {lang:action.data});
         default:
             return state;
     }

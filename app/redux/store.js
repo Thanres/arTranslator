@@ -6,6 +6,7 @@ const defaultState = {
     labels:{},
     languages:{},
     translations:{},
+    references:{}
 };
 
 const Store = createStore(rootReducer, defaultState, applyMiddleware(thunkMiddleware));

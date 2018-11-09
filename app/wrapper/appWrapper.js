@@ -7,12 +7,14 @@ import App from '../App';
 import { changeLanguage } from '../redux/actions/langActions';
 import { receiveTranslation, postTranslation } from '../redux/actions/transActions';
 import { receiveVision, postVision } from '../redux/actions/visionActions';
+import { setARNavRef } from '../redux/actions/referenceActions';
 
 const mapStateToProps = state => {
     return {
         labels : state.labels,
         languages : state.languages,
         translations : state.translations,
+        references : state.references
     };
 };
 
@@ -24,6 +26,7 @@ const mapDispatchToProps = dispatch => {
         endRequest: (req) => dispatch(endRequest(req))
     };*/
     return bindActionCreators({
+        setARNavRef,
         changeLanguage,
         receiveTranslation, postTranslation,
         receiveVision, postVision

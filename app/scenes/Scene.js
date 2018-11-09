@@ -39,7 +39,8 @@ export default class Scene extends Component {
   }
 
   _onInitialized(state, reason) {
-    console.warn(JSON.stringify(this.props.sceneNavigator))
+    //this.props.sceneNavigator.viroAppProps.setARNavRef(this.props.sceneNavigator)
+    //this.viroAppProps.setARNavRef(this.props.sceneNavigator)
     if (state == ViroConstants.TRACKING_NORMAL) {
       /*this.props.sceneNavigator.takeScreenshot('name',false).then((temp) =>
         {this.setState({
