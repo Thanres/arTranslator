@@ -10,13 +10,19 @@ import { receiveVision, postVision } from '../redux/actions/visionActions';
 
 const mapStateToProps = state => {
     return {
-        labels : null,
-        languages : null,
-        translations : null,
+        labels : state.labels,
+        languages : state.languages,
+        translations : state.translations,
     };
 };
 
 const mapDispatchToProps = dispatch => {
+    /* ??
+    return {
+        getProfile: (profile) => dispatch(getProfile(profile)),
+        startRequest: (req) => dispatch(startRequest(req)),
+        endRequest: (req) => dispatch(endRequest(req))
+    };*/
     return bindActionCreators({
         changeLanguage,
         receiveTranslation, postTranslation,

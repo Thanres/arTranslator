@@ -81,7 +81,8 @@ export default class App extends Component {
       lang : lang
     })
     this.state.lang = lang;
-    console.warn(this.state.lang)
+    this.props.changeLanguage(lang)
+    console.warn(this.props)
   }
   takephoto() {
     console.log(this.refs.sceneNavigator)
