@@ -4,7 +4,7 @@ import labels from "./labels";
 function references(state = [], action){
     switch (action.type) {
         case type.SET_REFERENCE_ARNAV:
-            return Object.assign({}, state, {references:{arNav:action.data}});
+            return Object.assign({}, state, {arNav:action.data});
         default:
             return state;
     }

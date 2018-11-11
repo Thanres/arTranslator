@@ -32,15 +32,20 @@ export default class Scene extends Component {
           <ViroImage
               position={[0, 0, -3]}
               source={this.state.uri}
+              visible={this.props.sceneNavigator.viroAppProps.labelVisibility}
           />
-          <ViroText position={[0, 0, -3]} text={this.props.sceneNavigator.viroAppProps.lang}/>
+          <ViroText 
+              position={[0, 0, -3]} 
+              text={this.props.sceneNavigator.viroAppProps.lang}
+              visible={this.props.sceneNavigator.viroAppProps.labelVisibility}
+          />
       </ViroARScene>
     );
   }
 
   _onInitialized(state, reason) {
-    //this.props.sceneNavigator.viroAppProps.setARNavRef(this.props.sceneNavigator)
-    //this.viroAppProps.setARNavRef(this.props.sceneNavigator)
+    this.props.sceneNavigator.viroAppProps.setARNavRef(this.props.sceneNavigator)
+    console.warn(this.state.labelVisibility)
     if (state == ViroConstants.TRACKING_NORMAL) {
       /*this.props.sceneNavigator.takeScreenshot('name',false).then((temp) =>
         {this.setState({

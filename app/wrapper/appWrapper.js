@@ -8,6 +8,7 @@ import { changeLanguage } from '../redux/actions/langActions';
 import { receiveTranslation, postTranslation } from '../redux/actions/transActions';
 import { receiveVision, postVision } from '../redux/actions/visionActions';
 import { setARNavRef } from '../redux/actions/referenceActions';
+import { vision } from '../redux/thunks/vision'
 
 const mapStateToProps = state => {
     return {
@@ -26,6 +27,7 @@ const mapDispatchToProps = dispatch => {
         endRequest: (req) => dispatch(endRequest(req))
     };*/
     return bindActionCreators({
+        vision,
         setARNavRef,
         changeLanguage,
         receiveTranslation, postTranslation,

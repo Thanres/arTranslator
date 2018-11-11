@@ -41,7 +41,8 @@ export default class App extends Component {
     super();
     this.state = {
       text : "click",
-      lang : 'DE'
+      lang : 'DE',
+      labelVisibility : true
     };
     this.takephoto = this.takephoto.bind(this),
     this.changelang = this.changelang.bind(this)
@@ -70,7 +71,13 @@ export default class App extends Component {
                   {text: 'ESP', onPress: () => this.changelang('ESP')},
                 ],
                 { cancelable: false }
-            )}><Text>{this.props.lang}</Text><Text>{this.props.languages.lang}</Text><Text>{this.props.languages.lang}</Text><Text>{this.props.lang}</Text></TouchableOpacity>
+            )}><Text>{this.state.text}</Text><Text>{this.state.text}</Text></TouchableOpacity>
+            <TouchableOpacity style={{position:'absolute',height:100, width:100, right:0, backgroundColor:'white'}} 
+            onPress={
+              () => this.takephoto()
+            }
+            >
+              </TouchableOpacity>
         </View>
     )
   }
@@ -78,6 +85,7 @@ export default class App extends Component {
   changelang(lang){
     this.setState({
       ...this.state,
+      labelVisibility : false,
       lang : lang
     })
     this.state.lang = lang;
@@ -85,17 +93,28 @@ export default class App extends Component {
     //console.warn(this.props)
     console.warn(this.props.languages.lang)
   }
-  takephoto() {
-    console.log(this.refs.sceneNavigator)
-    /*
-      this.refs.sceneNavigator.current.takeScreenshot('name',false).then((temp) =>
-        {this.setState({
-          navigator : this.state.navigator,
-          text : temp.url,
-          uri : {uri: 'file://' + temp.url}//temp.url
-        })
-        console.warn(this.state.text);}
-      );*/
-  }
 
+  takephoto(){
+    this.setState({labelVisibility:false})
+    //takescreenshot-then(apiaufruf)-then(setstate)  --> 'file://' + temp.url
+    this.props.references.arNav.takeScreenshot('name',false).then((temp) =>
+      {
+        //apiaufruf durch thunk
+        this.props.vision('file://' + temp.url).then(
+          (result) => {
+            console.warn("worked")
+            console.warn(JSON.stringify(result))
+            this.setState(
+              {
+              text : JSON.stringify(result),
+              uri : {uri: 'file://' + temp.url}, //temp.url
+              labelVisibility : true
+              }
+            )
+          }
+        )
+      }
+
+    )
+  }
 }
