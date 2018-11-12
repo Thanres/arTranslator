@@ -28,14 +28,16 @@ export default class Scene extends Component {
 
   render() {
     return (
-      <ViroARScene onTrackingUpdated={this._onInitialized} >
+      <ViroARScene onTrackingUpdated={this._onInitialized} ref={(component)=>{this.arSceneRef = component}}>
           <ViroImage
-              position={[0, 0, -3]}
+              position={this.props.sceneNavigator.viroAppProps.textPosition}
+              rotation={this.props.sceneNavigator.viroAppProps.textRotation}
               source={this.state.uri}
               visible={this.props.sceneNavigator.viroAppProps.labelVisibility}
           />
           <ViroText 
-              position={[0, 0, -3]} 
+              position={this.props.sceneNavigator.viroAppProps.textPosition}
+              rotation={this.props.sceneNavigator.viroAppProps.textRotation}
               text={this.props.sceneNavigator.viroAppProps.lang}
               visible={this.props.sceneNavigator.viroAppProps.labelVisibility}
           />
@@ -44,6 +46,7 @@ export default class Scene extends Component {
   }
 
   _onInitialized(state, reason) {
+    this.props.sceneNavigator.viroAppProps.setARSceneRef(this.arSceneRef)
     this.props.sceneNavigator.viroAppProps.setARNavRef(this.props.sceneNavigator)
     console.warn(this.state.labelVisibility)
     if (state == ViroConstants.TRACKING_NORMAL) {

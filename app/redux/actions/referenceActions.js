@@ -6,3 +6,11 @@ export function setARNavRef(data){
         data:data,
     }
 }
+
+
+export function setARSceneRef(data){
+    return{
+        type: type.SET_REFERENCE_ARSCENE,
+        data:data,
+    }
+}

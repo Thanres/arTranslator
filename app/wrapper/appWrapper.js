@@ -7,7 +7,7 @@ import App from '../App';
 import { changeLanguage } from '../redux/actions/langActions';
 import { receiveTranslation, postTranslation } from '../redux/actions/transActions';
 import { receiveVision, postVision } from '../redux/actions/visionActions';
-import { setARNavRef } from '../redux/actions/referenceActions';
+import { setARNavRef, setARSceneRef } from '../redux/actions/referenceActions';
 import { vision } from '../redux/thunks/vision'
 
 const mapStateToProps = state => {
@@ -28,6 +28,7 @@ const mapDispatchToProps = dispatch => {
     };*/
     return bindActionCreators({
         vision,
+        setARSceneRef,
         setARNavRef,
         changeLanguage,
         receiveTranslation, postTranslation,

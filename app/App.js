@@ -29,6 +29,8 @@ import {
   ViroARSceneNavigator,
 } from 'react-viro';
 
+import { getLabelPosition } from './functions/sceneHandler'
+
 import {viroApiKey} from "./api/apiKeys"
 
 //default Navigatortype
@@ -42,7 +44,9 @@ export default class App extends Component {
     this.state = {
       text : "click",
       lang : 'DE',
-      labelVisibility : true
+      labelVisibility : true,
+      textPosition : [0, 0, -3],
+      textRotation : [0, 0, 0]
     };
     this.takephoto = this.takephoto.bind(this),
     this.changelang = this.changelang.bind(this)
@@ -82,16 +86,22 @@ export default class App extends Component {
     )
   }
 
+  //functions
+
   changelang(lang){
+    this.props.references.arScene.getCameraOrientationAsync().then((result)=>{
+      console.warn(result.rotation)
+      objPos = getLabelPosition(result.position,result.rotation,1)
+      this.setState({
+        textPosition : objPos,
+        textRotation : result.rotation
+      })
+    })
     this.setState({
-      ...this.state,
-      labelVisibility : false,
       lang : lang
     })
     this.state.lang = lang;
     this.props.changeLanguage(lang)
-    //console.warn(this.props)
-    console.warn(this.props.languages.lang)
   }
 
   takephoto(){
