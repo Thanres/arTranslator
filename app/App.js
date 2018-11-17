@@ -90,8 +90,8 @@ export default class App extends Component {
 
   changelang(lang){
     this.props.references.arScene.getCameraOrientationAsync().then((result)=>{
-      console.warn(result.rotation)
-      objPos = getLabelPosition(result.position,result.rotation,1)
+      console.warn(result.forward)
+      objPos = getLabelPosition(result.position,result.forward,3)
       this.setState({
         textPosition : objPos,
         textRotation : result.rotation

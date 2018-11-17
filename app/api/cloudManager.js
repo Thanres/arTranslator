@@ -2,7 +2,7 @@ import {apiVision} from "./apiVision";
 import {apiTranslation} from "./apiTranslation";
 
 export async function cloudManagerVision(image){
-    //ändern wen net direkt image als base64
+    //ändern wenn net direkt image als base64
     let response= await apiVision(image);
     let data= await response.json();
     let returnData;

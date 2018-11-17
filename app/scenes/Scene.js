@@ -27,19 +27,20 @@ export default class Scene extends Component {
   }
 
   render() {
+    this.data = this.props.sceneNavigator.viroAppProps
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} ref={(component)=>{this.arSceneRef = component}}>
           <ViroImage
-              position={this.props.sceneNavigator.viroAppProps.textPosition}
-              rotation={this.props.sceneNavigator.viroAppProps.textRotation}
+              position={this.data.textPosition}
+              rotation={this.data.textRotation}
               source={this.state.uri}
-              visible={this.props.sceneNavigator.viroAppProps.labelVisibility}
+              visible={this.data.labelVisibility}
           />
           <ViroText 
-              position={this.props.sceneNavigator.viroAppProps.textPosition}
-              rotation={this.props.sceneNavigator.viroAppProps.textRotation}
-              text={this.props.sceneNavigator.viroAppProps.lang}
-              visible={this.props.sceneNavigator.viroAppProps.labelVisibility}
+              position={this.data.textPosition}
+              rotation={this.data.textRotation}
+              text={this.data.lang}
+              visible={this.data.labelVisibility}
           />
       </ViroARScene>
     );
