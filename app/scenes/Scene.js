@@ -49,15 +49,7 @@ export default class Scene extends Component {
   _onInitialized(state, reason) {
     this.props.sceneNavigator.viroAppProps.setARSceneRef(this.arSceneRef)
     this.props.sceneNavigator.viroAppProps.setARNavRef(this.props.sceneNavigator)
-    console.warn(this.state.labelVisibility)
     if (state == ViroConstants.TRACKING_NORMAL) {
-      /*this.props.sceneNavigator.takeScreenshot('name',false).then((temp) =>
-        {this.setState({
-          text : temp.url,
-          uri : {uri: 'file://' + temp.url}//temp.url
-        })
-        console.warn(this.state.text);},
-      );*/
     } else if (state == ViroConstants.TRACKING_NONE) {
       // Handle loss of tracking
     }

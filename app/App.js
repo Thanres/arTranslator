@@ -16,8 +16,12 @@ import {
   PixelRatio,
   TouchableHighlight,
   TouchableOpacity,
-  Alert
+  Alert,
 } from 'react-native';
+
+import styles from './res/styles'
+
+import LanguagePicker from './components/languagePicker'
 
 import {
     Button,
@@ -45,11 +49,13 @@ export default class App extends Component {
       text : "click",
       lang : 'DE',
       labelVisibility : true,
+      modalVisibility : false,
       textPosition : [0, 0, -3],
       textRotation : [0, 0, 0]
     };
     this.takephoto = this.takephoto.bind(this),
     this.changelang = this.changelang.bind(this)
+    this.hideModal = this.hideModal.bind(this)
   }
 
   onDeleteBTN = () => {
@@ -59,64 +65,63 @@ export default class App extends Component {
   // if you are building a specific type of experience.
   render() {
     return(
-        <View style={{height:'100%', width:'100%'}}>
+        <View style={{height:'100%', width:'100%', marginTop: 24}}>
             <ViroARSceneNavigator apiKey={viroApiKey}
                 viroAppProps = {{...this.props, ...this.state}}
                 ref='sceneNavigator'
                 style={{position: 'absolute',height:'100%', width:'100%',top:30}}
                 initialScene={{scene: InitialARScene}} />
-            <TouchableOpacity style={{position:'absolute',height:100, width:100, backgroundColor:'white'}} onPress={
-              () => Alert.alert(
-                'select language',
-                '',
-                [
-                  {text: 'DE', onPress: () => this.changelang('DE')},
-                  {text: 'EN', onPress: () => this.changelang('EN')},
-                  {text: 'ESP', onPress: () => this.changelang('ESP')},
-                ],
-                { cancelable: false }
-            )}><Text>{this.state.text}</Text><Text>{this.state.text}</Text></TouchableOpacity>
-            <TouchableOpacity style={{position:'absolute',height:100, width:100, right:0, backgroundColor:'white'}} 
+            <TouchableOpacity style={[styles.buttonOnScene, {left:10, top:10}]} onPress={
+              () => 
+              this.setState({
+                modalVisibility : true
+              })}>
+              <Text>change language</Text></TouchableOpacity>
+            <TouchableOpacity style={[styles.buttonOnScene, {right:10, top:10}]} 
             onPress={
               () => this.takephoto()
-            }
-            >
-              </TouchableOpacity>
+            }><Text>take photo</Text></TouchableOpacity>
+          <LanguagePicker {...this.state} changelang = {this.changelang} hideModal = {this.hideModal}/>
+          
         </View>
     )
   }
 
   //functions
 
-  changelang(lang){
-    this.props.references.arScene.getCameraOrientationAsync().then((result)=>{
-      console.warn(result.forward)
-      objPos = getLabelPosition(result.position,result.forward,3)
-      this.setState({
-        textPosition : objPos,
-        textRotation : result.rotation
-      })
-    })
+  hideModal(){
     this.setState({
-      lang : lang
+      modalVisibility : false 
     })
-    this.state.lang = lang;
+  }
+
+  changelang(lang){
+    this.setState({
+      lang : lang,
+      modalVisibility : false
+    })
     this.props.changeLanguage(lang)
   }
 
   takephoto(){
-    this.setState({labelVisibility:false})
+    this.props.references.arScene.getCameraOrientationAsync().then((result)=>{
+      objPos = getLabelPosition(result.position,result.forward,3)
+      this.setState({
+        textPosition : objPos,
+        textRotation : result.rotation,
+        labelVisibility:false
+      })
+    })
     //takescreenshot-then(apiaufruf)-then(setstate)  --> 'file://' + temp.url
     this.props.references.arNav.takeScreenshot('name',false).then((temp) =>
       {
         //apiaufruf durch thunk
-        this.props.vision('file://' + temp.url).then(
-          (result) => {
+        this.props.vision('file://' + temp.url).then((result) => {
             console.warn("worked")
-            console.warn(JSON.stringify(result))
+            console.warn(result)
             this.setState(
               {
-              text : JSON.stringify(result),
+              text : result,
               uri : {uri: 'file://' + temp.url}, //temp.url
               labelVisibility : true
               }
