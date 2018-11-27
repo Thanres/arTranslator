@@ -46,7 +46,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      text : "click",
+      text : "Scanne ein Objekt",
       lang : 'DE',
       labelVisibility : true,
       modalVisibility : false,
@@ -81,8 +81,7 @@ export default class App extends Component {
             onPress={
               () => this.takephoto()
             }><Text>take photo</Text></TouchableOpacity>
-          <LanguagePicker {...this.state} changelang = {this.changelang} hideModal = {this.hideModal}/>
-          
+          <LanguagePicker {...this.state} changelang = {this.changelang} hideModal = {this.hideModal}/>         
         </View>
     )
   }

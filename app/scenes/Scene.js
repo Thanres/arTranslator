@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 
 import {StyleSheet, Alert} from 'react-native';
+import styles from '../res/styles'
 
 import {
   ViroImage,
@@ -10,6 +11,7 @@ import {
   ViroText,
   ViroConstants,
   ViroButton,
+  ViroFlexView
 } from 'react-viro';
 
 export default class Scene extends Component {
@@ -30,18 +32,24 @@ export default class Scene extends Component {
     this.data = this.props.sceneNavigator.viroAppProps
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} ref={(component)=>{this.arSceneRef = component}}>
-          <ViroImage
-              position={this.data.textPosition}
-              rotation={this.data.textRotation}
-              source={this.state.uri}
-              visible={this.data.labelVisibility}
-          />
-          <ViroText 
-              position={this.data.textPosition}
-              rotation={this.data.textRotation}
-              text={this.data.lang}
-              visible={this.data.labelVisibility}
-          />
+          <ViroFlexView
+          position={this.data.textPosition}
+          rotation={this.data.textRotation}
+          backgroundColor='rgba(255, 255, 255, 1.0)'
+          visible={this.data.labelVisibility}
+          width={3}
+          height={-1.1}
+          >
+            <ViroText 
+                //position={this.data.textPosition}
+                //rotation={this.data.textRotation}
+                text={this.data.text}
+                width={3}
+                heght={3}
+                visible={this.data.labelVisibility}
+                style={[styles.viroText, {textLineBreakMode: 'charwrap'}]}
+            />
+          </ViroFlexView>
       </ViroARScene>
     );
   }
@@ -56,8 +64,9 @@ export default class Scene extends Component {
   }
 }
 
-var styles = StyleSheet.create({
-  helloWorldTextStyle: {
+
+var styleText = StyleSheet.create({
+  viroText: {
     fontFamily: 'Arial',
     fontSize: 30,
     color: '#ffffff',

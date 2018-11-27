@@ -8,6 +8,13 @@ export default styles = StyleSheet.create({
       padding: 10,
       backgroundColor:'white'
     },
+    viroText: {
+        fontFamily: 'Arial',
+        fontSize: 30,
+        color: '#ffffff',
+        textAlignVertical: 'center',
+        textAlign: 'center'  
+      },
     languageContainer: {
         alignItems:'center', 
         borderTopLeftRadius:10,
