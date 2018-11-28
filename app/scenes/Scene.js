@@ -37,7 +37,6 @@ export default class Scene extends Component {
           rotation={this.data.textRotation}
           backgroundColor='rgba(255, 255, 255, 1.0)'
           visible={this.data.labelVisibility}
-          width={3}
           height={-1.1}
           >
             <ViroText 
@@ -45,9 +44,8 @@ export default class Scene extends Component {
                 //rotation={this.data.textRotation}
                 text={this.data.text}
                 width={3}
-                heght={3}
                 visible={this.data.labelVisibility}
-                style={[styles.viroText, {textLineBreakMode: 'charwrap'}]}
+                style={styles.viroText}
             />
           </ViroFlexView>
       </ViroARScene>
