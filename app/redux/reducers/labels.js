@@ -6,7 +6,7 @@ function labels(state = [], action){
             return Object.assign({}, state, {labels:{isLoading:true}});
 
         case type.RECEIVE_VISION:
-            return Object.assign({}, state, {labels:{isLoading:false,enLabel:action.data}});
+            return Object.assign({}, state, {isLoading:false,enLabel:action.data.label});
         default:
             return state;
     }

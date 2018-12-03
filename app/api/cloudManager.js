@@ -1,9 +1,9 @@
 import {apiVision} from "./apiVision";
 import {apiTranslation} from "./apiTranslation";
-
+import RNFS from "react-native-fs";
 export async function cloudManagerVision(image){
-    //ändern wenn net direkt image als base64
-    let response= await apiVision(image);
+    let imageB64=await RNFS.readFile(image,"base64");
+    let response= await apiVision(imageB64);
     let data= await response.json();
     let returnData;
     if(response.ok){
@@ -12,8 +12,7 @@ export async function cloudManagerVision(image){
     }else{
         returnData={isError:true,errorMsg:data}
     }
-    await console.log(returnData);
-    console.log("vision");
+    
     return returnData;
 }
 
@@ -26,7 +25,5 @@ export async function cloudManagerTranslation(label,lang){
     }else{
         returnData={isError:true,errorMsg:data}
     }
-    await console.log(returnData);
-    console.log("translation");
     return returnData;
 }

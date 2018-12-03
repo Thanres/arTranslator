@@ -108,23 +108,21 @@ export default class App extends Component {
       this.setState({
         textPosition : objPos,
         textRotation : result.rotation,
-        labelVisibility:false
+        labelVisibility: false
       })
     })
     //takescreenshot-then(apiaufruf)-then(setstate)  --> 'file://' + temp.url
     this.props.references.arNav.takeScreenshot('name',false).then((temp) =>
       {
         //apiaufruf durch thunk
-        this.props.vision('file://' + temp.url).then((result) => {
-            console.warn("worked")
-            console.warn(result)
-            this.setState(
-              {
-              text : result,
-              uri : {uri: 'file://' + temp.url}, //temp.url
-              labelVisibility : true
-              }
-            )
+        this.props.vision('file://' + temp.url).then(() => {
+          this.setState(
+          {
+            text : this.props.labels.enLabel,
+            uri : {uri: 'file://' + temp.url}, //temp.url  
+            labelVisibility : true    
+          })
+            
           }
         )
       }

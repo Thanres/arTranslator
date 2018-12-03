@@ -41,7 +41,7 @@ export default class LanguagePicker extends Component {
                     <TouchableOpacity
                         style={styles.sizeFlagCont}
                         onPress={() => {
-                        this.props.changelang('DE')
+                        this.props.changelang('de')
                         }}>
                         <Image
                         style={styles.sizeFlag}
@@ -51,7 +51,7 @@ export default class LanguagePicker extends Component {
                     <TouchableOpacity
                         style={styles.sizeFlagCont}
                         onPress={() => {
-                        this.props.changelang('EN')
+                        this.props.changelang('en')
                         }}>
                         <Image
                         style={styles.sizeFlag}
@@ -61,7 +61,7 @@ export default class LanguagePicker extends Component {
                     <TouchableOpacity
                         style={styles.sizeFlagCont}
                         onPress={() => {
-                        this.props.changelang('ESP')
+                        this.props.changelang('es')
                         }}>
                         <Image
                         style={styles.sizeFlag}
@@ -71,7 +71,7 @@ export default class LanguagePicker extends Component {
                     <TouchableOpacity
                         style={styles.sizeFlagCont}
                         onPress={() => {
-                        this.props.changelang('FR')
+                        this.props.changelang('fr')
                         }}>
                         <Image
                         style={styles.sizeFlag}

@@ -32,22 +32,15 @@ export default class Scene extends Component {
     this.data = this.props.sceneNavigator.viroAppProps
     return (
       <ViroARScene onTrackingUpdated={this._onInitialized} ref={(component)=>{this.arSceneRef = component}}>
-          <ViroFlexView
-          position={this.data.textPosition}
-          rotation={this.data.textRotation}
-          backgroundColor='rgba(255, 255, 255, 1.0)'
-          visible={this.data.labelVisibility}
-          height={-1.1}
-          >
+
             <ViroText 
-                //position={this.data.textPosition}
-                //rotation={this.data.textRotation}
+                position={this.data.textPosition}
+                rotation={this.data.textRotation}
                 text={this.data.text}
                 width={3}
                 visible={this.data.labelVisibility}
                 style={styles.viroText}
             />
-          </ViroFlexView>
       </ViroARScene>
     );
   }
