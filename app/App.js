@@ -120,7 +120,15 @@ export default class App extends Component {
         //apiaufruf durch thunk
         this.props.vision('file://' + temp.url).then( () =>
         {
+          if(this.state.lang != "en") // checks if translation is needed
           this.translate()
+          else{
+            this.setState(
+              {
+                text : this.props.labels.enLabel,
+                labelVisibility : true    
+              })
+          }
         })
       }
     )
@@ -130,7 +138,7 @@ export default class App extends Component {
     this.props.translation(this.props.labels.enLabel,this.state.lang).then( () =>
       this.setState(
         {
-          text : this.props.labels.enLabel,
+          text : this.props.translations.translated.transLabel,
           labelVisibility : true    
         })
     )
