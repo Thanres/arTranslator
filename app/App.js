@@ -46,8 +46,8 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      text : "Scanne ein Objekt",
-      lang : 'DE',
+      text : "",
+      lang : 'de',
       labelVisibility : true,
       modalVisibility : false,
       textPosition : [0, 0, -3],
@@ -56,6 +56,7 @@ export default class App extends Component {
     this.takephoto = this.takephoto.bind(this),
     this.changelang = this.changelang.bind(this)
     this.hideModal = this.hideModal.bind(this)
+    this.translate = this.translate.bind(this)
   }
 
   onDeleteBTN = () => {
@@ -99,7 +100,9 @@ export default class App extends Component {
       lang : lang,
       modalVisibility : false
     })
-    this.props.changeLanguage(lang)
+    this.props.changeLanguage(lang).then(()=>
+      this.translate()
+    )
   }
 
   takephoto(){
@@ -115,18 +118,21 @@ export default class App extends Component {
     this.props.references.arNav.takeScreenshot('name',false).then((temp) =>
       {
         //apiaufruf durch thunk
-        this.props.vision('file://' + temp.url).then(() => {
-          this.setState(
-          {
-            text : this.props.labels.enLabel,
-            uri : {uri: 'file://' + temp.url}, //temp.url  
-            labelVisibility : true    
-          })
-            
-          }
-        )
+        this.props.vision('file://' + temp.url).then( () =>
+        {
+          this.translate()
+        })
       }
+    )
+  }
 
+  translate(){
+    this.props.translation(this.props.labels.enLabel,this.state.lang).then( () =>
+      this.setState(
+        {
+          text : this.props.labels.enLabel,
+          labelVisibility : true    
+        })
     )
   }
 }

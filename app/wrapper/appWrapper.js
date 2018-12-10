@@ -9,6 +9,7 @@ import { receiveTranslation, postTranslation } from '../redux/actions/transActio
 import { receiveVision, postVision } from '../redux/actions/visionActions';
 import { setARNavRef, setARSceneRef } from '../redux/actions/referenceActions';
 import { vision } from '../redux/thunks/vision'
+import { translation } from '../redux/thunks/translation'
 
 const mapStateToProps = state => {
     return {
@@ -20,19 +21,12 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-    /* ??
-    return {
-        getProfile: (profile) => dispatch(getProfile(profile)),
-        startRequest: (req) => dispatch(startRequest(req)),
-        endRequest: (req) => dispatch(endRequest(req))
-    };*/
     return bindActionCreators({
         vision,
         setARSceneRef,
         setARNavRef,
         changeLanguage,
-        receiveTranslation, postTranslation,
-        receiveVision, postVision
+        translation
     }, dispatch);
 };
 
