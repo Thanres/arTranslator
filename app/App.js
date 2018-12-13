@@ -66,7 +66,7 @@ export default class App extends Component {
   // if you are building a specific type of experience.
   render() {
     return(
-        <View style={{height:'100%', width:'100%', marginTop: 24}}>
+        <View style={{height:'100%', width:'100%'}}>
             <ViroARSceneNavigator apiKey={viroApiKey}
                 viroAppProps = {{...this.props, ...this.state}}
                 ref='sceneNavigator'
