@@ -84,7 +84,7 @@ export default class App extends Component {
               () => this.takephoto()
             }><Text>take photo</Text></TouchableOpacity>
           <LanguagePicker {...this.state} changelang = {this.changelang} setDistance = {this.setDistance} distance = {this.state.distance} hideModal = {this.hideModal}/>
-          { this.props.labels.isLoading ?  <ActivityIndicator style={{top: '50%', left: '50%', bottom:'50%', right:'50%'}} size="large" color="#0000ff" /> : null}                    
+          { this.props.labels.isLoading ?  <View style={{height:'100%', width:'100%', backgroundColor: 'rgba(52, 52, 52, 0.8)'}}><ActivityIndicator style={{top: '50%', left: '50%', bottom:'50%', right:'50%'}} size="large" color="#0000ff" /></View> : null}                    
         </View>
     )
   }

@@ -83,6 +83,9 @@ export default class LanguagePicker extends Component {
                         </View>  
                         <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
                             <Slider
+                                minimumValue={0}
+                                maximumValue={2}
+                                step = {0.1}
                                 value={this.props.distance}
                                 onValueChange={(value) => this.props.setDistance(value)} />
                             <Text>Textdistance: {this.props.distance}</Text>
