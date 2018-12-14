@@ -17,6 +17,7 @@ import {
     ScrollView,
     LinearGradient,
   } from 'react-native';
+  import { Slider } from 'react-native-elements'
 
   import styles from '../res/styles'
 
@@ -38,46 +39,54 @@ export default class LanguagePicker extends Component {
             <TouchableWithoutFeedback onPress={() => {this.props.hideModal()}}>
                 <View style={styles.languageContainerBack}>
                     <View style={styles.languageContainer}>
-                    <TouchableOpacity
-                        style={styles.sizeFlagCont}
-                        onPress={() => {
-                        this.props.changelang('de')
-                        }}>
-                        <Image
-                        style={styles.sizeFlag}
-                        source={flagGER}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.sizeFlagCont}
-                        onPress={() => {
-                        this.props.changelang('en')
-                        }}>
-                        <Image
-                        style={styles.sizeFlag}
-                        source={flagEN}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.sizeFlagCont}
-                        onPress={() => {
-                        this.props.changelang('es')
-                        }}>
-                        <Image
-                        style={styles.sizeFlag}
-                        source={flagESP}
-                        />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                        style={styles.sizeFlagCont}
-                        onPress={() => {
-                        this.props.changelang('fr')
-                        }}>
-                        <Image
-                        style={styles.sizeFlag}
-                        source={flagFR}
-                        />
-                    </TouchableOpacity>
+                        <View style={{flexDirection:'row'}}>
+                            <TouchableOpacity
+                                style={styles.sizeFlagCont}
+                                onPress={() => {
+                                this.props.changelang('de')
+                                }}>
+                                <Image
+                                style={styles.sizeFlag}
+                                source={flagGER}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.sizeFlagCont}
+                                onPress={() => {
+                                this.props.changelang('en')
+                                }}>
+                                <Image
+                                style={styles.sizeFlag}
+                                source={flagEN}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.sizeFlagCont}
+                                onPress={() => {
+                                this.props.changelang('es')
+                                }}>
+                                <Image
+                                style={styles.sizeFlag}
+                                source={flagESP}
+                                />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                                style={styles.sizeFlagCont}
+                                onPress={() => {
+                                this.props.changelang('fr')
+                                }}>
+                                <Image
+                                style={styles.sizeFlag}
+                                source={flagFR}
+                                />
+                            </TouchableOpacity>
+                        </View>  
+                        <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
+                            <Slider
+                                value={this.props.distance}
+                                onValueChange={(value) => this.props.setDistance(value)} />
+                            <Text>Textdistance: {this.props.distance}</Text>
+                        </View>
                     </View>
                 </View>
             </TouchableWithoutFeedback>

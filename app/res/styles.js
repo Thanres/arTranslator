@@ -20,7 +20,6 @@ export default styles = StyleSheet.create({
         borderTopLeftRadius:10,
         borderTopRightRadius:10,
         backgroundColor:'white',
-        flexDirection:'row',
         position:'absolute',
         padding:5,
         bottom:0

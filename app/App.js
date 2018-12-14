@@ -57,6 +57,7 @@ export default class App extends Component {
     this.changelang = this.changelang.bind(this)
     this.hideModal = this.hideModal.bind(this)
     this.translate = this.translate.bind(this)
+    this.setDistance = this.setDistance.bind(this)
   }
 
   onDeleteBTN = () => {
@@ -82,7 +83,7 @@ export default class App extends Component {
             onPress={
               () => this.takephoto()
             }><Text>take photo</Text></TouchableOpacity>
-          <LanguagePicker {...this.state} changelang = {this.changelang} hideModal = {this.hideModal}/>         
+          <LanguagePicker {...this.state} changelang = {this.changelang} setDistance = {this.setDistance} distance = {this.state.distance} hideModal = {this.hideModal}/>         
         </View>
     )
   }
@@ -105,9 +106,13 @@ export default class App extends Component {
     )
   }
 
+  setDistance(toDistance){
+    this.setstate({ distance: toDistance})
+  }
+
   takephoto(){
     this.props.references.arScene.getCameraOrientationAsync().then((result)=>{
-      objPos = getLabelPosition(result.position,result.forward,3)
+      objPos = getLabelPosition(result.position,result.forward,1)
       this.setState({
         textPosition : objPos,
         textRotation : result.rotation,
