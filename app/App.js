@@ -78,13 +78,13 @@ export default class App extends Component {
               this.setState({
                 modalVisibility : true
               })}>
-              <Text>change language</Text></TouchableOpacity>
+              <Text>settings</Text></TouchableOpacity>
             <TouchableOpacity style={[styles.buttonOnScene, {right:10, top:10}]} 
             onPress={
               () => this.takephoto()
             }><Text>take photo</Text></TouchableOpacity>
           <LanguagePicker {...this.state} changelang = {this.changelang} setDistance = {this.setDistance} distance = {this.state.distance} hideModal = {this.hideModal}/>
-          { this.props.labels.isLoading ?  <ActivityIndicator size="large" color="#0000ff" /> : null}                    
+          { this.props.labels.isLoading ?  <ActivityIndicator style={{top: '50%', left: '50%', bottom:'50%', right:'50%'}} size="large" color="#0000ff" /> : null}                    
         </View>
     )
   }
