@@ -10,7 +10,7 @@ export default styles = StyleSheet.create({
     },
     viroText: {
         fontFamily: 'Arial',
-        fontSize: 30,
+        fontSize: 10,
         color: '#ffffff',
         textAlignVertical: 'center',
         textAlign: 'center'  

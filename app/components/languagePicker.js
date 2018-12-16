@@ -1,3 +1,4 @@
+import { round } from 'mathjs'
 
 let flagGER = require("../res/ger.png")
 let flagEN = require("../res/eng.png")
@@ -14,8 +15,7 @@ import {
     TouchableOpacity,
     Modal,
     Image,
-    ScrollView,
-    LinearGradient,
+    Alert
   } from 'react-native';
   import { Slider } from 'react-native-elements'
 
@@ -36,9 +36,11 @@ export default class LanguagePicker extends Component {
               modalVisibility : false
             })
           }}>
-            <TouchableWithoutFeedback onPress={() => {this.props.hideModal()}}>
-                <View style={styles.languageContainerBack}>
-                    <View style={styles.languageContainer}>
+                <TouchableWithoutFeedback onPress={() => {this.props.hideModal()}}>
+                    <View style={styles.languageContainerBack}>
+                    </View>
+                </TouchableWithoutFeedback>
+                    <View style={[styles.languageContainer,{alignSelf:'center'}]}>
                         <View style={{flexDirection:'row'}}>
                             <TouchableOpacity
                                 style={styles.sizeFlagCont}
@@ -81,18 +83,21 @@ export default class LanguagePicker extends Component {
                                 />
                             </TouchableOpacity>
                         </View>  
-                        <View style={{flex: 1, alignItems: 'stretch', justifyContent: 'center'}}>
+                        <View style={{flex: 1, width:'100%',paddingLeft:3,paddingRight:3, alignItems: 'stretch', justifyContent: 'center'}}>
                             <Slider
-                                minimumValue={0}
-                                maximumValue={2}
+                                minimumValue={0.2}
+                                maximumValue={1.5}
                                 step = {0.1}
                                 value={this.props.distance}
-                                onValueChange={(value) => this.props.setDistance(value)} />
-                            <Text>Textdistance: {this.props.distance}</Text>
+                                onValueChange={(value) => 
+                                    {
+                                        this.props.setTextDistance(value)
+                                    }
+                                } 
+                                />
+                            <Text>textdistance: {round(this.props.distance * 100) / 100}</Text>
                         </View>
                     </View>
-                </View>
-            </TouchableWithoutFeedback>
         </Modal>
         )
     }

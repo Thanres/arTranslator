@@ -17,16 +17,13 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   Alert,
+  ActivityIndicator
 } from 'react-native';
 
 import styles from './res/styles'
 
 import LanguagePicker from './components/languagePicker'
 
-import {
-    Button,
-    Icon,
-  }from 'react-native-elements';
 
 import {
   ViroVRSceneNavigator,
@@ -51,13 +48,15 @@ export default class App extends Component {
       labelVisibility : true,
       modalVisibility : false,
       textPosition : [0, 0, -3],
-      textRotation : [0, 0, 0]
+      textRotation : [0, 0, 0],
+      distance : 1
     };
     this.takephoto = this.takephoto.bind(this),
     this.changelang = this.changelang.bind(this)
     this.hideModal = this.hideModal.bind(this)
     this.translate = this.translate.bind(this)
-    this.setDistance = this.setDistance.bind(this)
+    this.setTextDistance = this.setTextDistance.bind(this)
+    this.translate = this.translate.bind(this)
   }
 
   onDeleteBTN = () => {
@@ -83,8 +82,8 @@ export default class App extends Component {
             onPress={
               () => this.takephoto()
             }><Text>take photo</Text></TouchableOpacity>
-          <LanguagePicker {...this.state} changelang = {this.changelang} setDistance = {this.setDistance} distance = {this.state.distance} hideModal = {this.hideModal}/>
-          { this.props.labels.isLoading ?  <View style={{height:'100%', width:'100%', backgroundColor: 'rgba(52, 52, 52, 0.8)'}}><ActivityIndicator style={{top: '50%', left: '50%', bottom:'50%', right:'50%'}} size="large" color="#0000ff" /></View> : null}                    
+          <LanguagePicker {...this.state} changelang = {this.changelang} setTextDistance = {this.setTextDistance} hideModal = {this.hideModal}/>
+          { this.props.labels.isLoading ?  <View style={{height:'100%', width:'100%',position:'absolute',justifyContent:'center', alignItems:'center'}}><ActivityIndicator size="large" color="#0000ff" /></View> : null}                    
         </View>
     )
   }
@@ -102,13 +101,14 @@ export default class App extends Component {
       lang : lang,
       modalVisibility : false
     })
-    this.props.changeLanguage(lang).then(()=>
+    if (this.state.text != "")
       this.translate()
-    )
   }
 
-  setDistance(toDistance){
-    this.setstate({ distance: toDistance})
+  setTextDistance(value){
+    this.setState({
+      distance : value,
+    })
   }
 
   takephoto(){
@@ -142,11 +142,13 @@ export default class App extends Component {
 
   translate(){
     this.props.translation(this.props.labels.enLabel,this.state.lang).then( () =>
-      this.setState(
-        {
-          text : this.props.translations.translated.transLabel,
-          labelVisibility : true    
-        })
+      {
+        this.setState(
+          {
+            text : this.state.lang != 'en' ? this.props.translations.translated.transLabel.translatedLabel : this.props.labels.enLabel,
+            labelVisibility : true    
+          })
+      }
     )
   }
 }
